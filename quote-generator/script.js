@@ -6,6 +6,9 @@ const quoteContainer = document.getElementById("quote-container");
 const loader = document.getElementById("loader");
 const h1Error = document.getElementById("error");
 
+newQuoteBtn.addEventListener("click", newQuote);
+twitterBtn.addEventListener("click", tweetQuote);
+
 let apiQuotes = [];
 
 function showLoadingSpinner() {
@@ -66,12 +69,4 @@ async function getQuotes() {
     }
 }
 
-function start() {
-    getQuotes();
-}
-
-// Event Listeners
-newQuoteBtn.addEventListener("click", newQuote);
-twitterBtn.addEventListener("click", tweetQuote);
-
-start();
+getQuotes();
