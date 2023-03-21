@@ -59,6 +59,7 @@ async function getQuotes() {
     try {
         const res = await fetch(apiUrl);
         apiQuotes = await res.json();
+        console.log(apiQuotes);
         newQuote();
     } catch (err) {
         showError();
