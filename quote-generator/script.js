@@ -12,6 +12,7 @@ twitterBtn.addEventListener("click", tweetQuote);
 let apiQuotes = [];
 
 function showLoadingSpinner() {
+    console.log("HERE");
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
