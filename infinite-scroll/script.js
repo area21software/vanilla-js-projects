@@ -2,11 +2,12 @@ const imageContainer = document.getElementById("image-container");
 const loader = document.getElementById("loader");
 const h1Error = document.getElementById("error");
 
-const count = 30;
+const apiKey = "";
+
 let imagesLoaded = 0;
 let totalImages = 0;
 let ready = false;
-const unsplashApiUrl = `https://api.unsplash.com/photos/random/?client_id=<API_KEY>&count=${count}`;
+let isInitialLoad = true;
 
 function showError() {
     loader.hidden = true;
@@ -17,7 +18,6 @@ function showError() {
 
 function imageLoaded() {
     imagesLoaded++;
-    console.log(imagesLoaded);
     if (imagesLoaded === totalImages) {
         ready = true;
         loader.hidden = true;
@@ -46,8 +46,22 @@ function displayPhotos() {
     });
 }
 
+// For performance, instead of pulling 30 images on load.
+let unsplashApiUrl;
+function handleInitialLoad() {
+    let initialImageCountOnLoad = 8;
+    let imageCount = 30;
+    if (isInitialLoad) {
+        unsplashApiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${initialImageCountOnLoad}`;
+        isInitialLoad = false;
+    } else {
+        unsplashApiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${imageCount}`;
+    }
+}
+
 async function getPhotos() {
     try {
+        handleInitialLoad();
         const res = await fetch(unsplashApiUrl);
         photos = await res.json();
         displayPhotos();
