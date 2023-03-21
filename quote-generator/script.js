@@ -33,6 +33,7 @@ function tweetQuote() {
 function newQuote() {
     showLoadingSpinner();
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
+    console.log(quote);
 
     if (quote.text.length > 75) {
         quoteSpan.classList.add("long-quote");
